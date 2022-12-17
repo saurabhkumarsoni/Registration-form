@@ -1,0 +1,156 @@
+<div class="container register">
+    <div class="row">
+        <div class="col-md-3 register-left">
+            <img src="" alt="" />
+            <h3>Welcome</h3>
+            <p>You are 30 seconds away from earning your own money!</p>
+            <input type="submit" name="" value="Login" /><br />
+        </div>
+        <div class="col-md-9 register-right">
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <h3 class="register-heading">Employee Registration</h3>
+                    <form [formGroup]="registrationForm" (ngSubmit)="submitData()">
+                        <div class="row register-form">
+                            <div class="flex-container">
+                                <div class="form-group">
+                                    <input type="text" [class.is-invalid]="f['fname']?.invalid &&
+                                    f['fname']?.touched" formControlName="fname" class="form-control"
+                                        placeholder="First Name *" />
+                                    <div *ngIf="f['fname'].invalid && (f['fname'].dirty || f['fname'].touched)">
+                                        <div *ngIf="f['fname'].errors?.['required']" class="text-danger">
+                                            This field is required.
+                                        </div>
+                                        <div *ngIf="f['fname'].errors?.['minlength']" class="text-danger">
+                                            This field must have at least 3 character.
+                                        </div>
+                                        <div *ngIf="f['fname'].errors?.['maxlength']" class="text-danger">
+                                            This field must have at most 50 characters.
+                                        </div>
+                                        <div *ngIf="f['fname']?.hasError('invalidName')" class="text-danger">
+                                            Special characters not allowed!
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" formControlName="lname" class="form-control"
+                                        placeholder="Last Name *" [class.is-invalid]="f['lname']?.invalid &&
+                                        f['lname']?.touched" />
+                                    <div *ngIf="f['lname'].invalid && (f['lname'].dirty || f['lname'].touched)">
+                                        <div *ngIf="f['lname'].errors?.['required']" class="text-danger">
+                                            This field is required.
+                                        </div>
+                                        <div *ngIf="f['lname'].errors?.['minlength']" class="text-danger">
+                                            This field must have at least 3 character.
+                                        </div>
+                                        <div *ngIf="f['lname'].errors?.['maxlength']" class="text-danger">
+                                            This field must have at most 50 characters.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" [class.is-invalid]="f['password']?.invalid &&
+                                    f['password']?.touched" formControlName="password" class="form-control"
+                                        placeholder="Password *" />
+                                    <div
+                                        *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+                                        <div *ngIf="f['password'].errors?.['required']" class="text-danger">
+                                            This field is required.
+                                        </div>
+                                        <div *ngIf="f['password'].hasError('passwordStrength')" class="text-danger">
+                                            {{f['password'].errors['passwordStrength']}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" [class.is-invalid]="f['confirmPassword'].invalid &&
+                                    f['confirmPassword']?.touched" formControlName="confirmPassword"
+                                        class="form-control" placeholder="Confirm Password *" />
+                                    <div
+                                        *ngIf="f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched)">
+
+                                        <div *ngIf="f['confirmPassword'].errors['required']" class="text-danger">
+                                            This field is required.
+                                        </div>
+                                        <div *ngIf="f['confirmPassword'].errors.confirmedValidator" class="text-danger">
+                                            Password and Confirm Password must be match.</div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="maxl">
+                                        <label class="radio inline">
+                                            <input type="radio" formControlName="gender" name="gender" value="male"
+                                                checked>
+                                            <span> Male </span>
+                                        </label>
+                                        <label class="radio inline">
+                                            <input type="radio" formControlName="gender" name="gender" value="female">
+                                            <span>Female </span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="Date" formControlName="dob" name="dob" class="form-control" id="Date"
+                                        placeholder="Date of Birth" required>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" [class.is-invalid]="f['email']?.invalid &&
+                                    f['email']?.touched" formControlName="email" class="form-control"
+                                        placeholder="Your Email *" />
+                                    <div class="text-danger"
+                                        *ngIf="f['email'].hasError('required') && (f['email'].dirty || f['email'].touched)">
+                                        This field is required
+                                    </div>
+                                    <div class="text-danger"
+                                        *ngIf="f['email'].hasError('pattern') && (f['email'].dirty || f['email'].touched)">
+                                        Please enter valid email address
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" [class.is-invalid]="f['phone']?.invalid &&
+                                    f['phone']?.touched" formControlName="phone" name="txtEmpPhone"
+                                        class="form-control" placeholder="Your Phone *" />
+                                    <div *ngIf="f['phone'].touched && f['phone'].invalid" class="text-danger">
+                                        <div *ngIf="f['phone'].errors?.required">Please enter mobile number</div>
+                                        <div *ngIf="f['phone'].errors?.pattern">Mobile number is not 10 digit</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="flex-container" formGroupName="address">
+                                <div class="form-group">
+                                    <input type="address" formControlName="street" class="form-control" name="Locality"
+                                        id="address-1" placeholder="Locality/House/Street no.">
+                                </div>
+                                <div class="form-group">
+                                    <input type="address" class="form-control" formControlName="city" name="address"
+                                        id="address-2" placeholder="Village/City Name.">
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select form-control" formControlName="state">
+                                        <option *ngFor="let state of states" [value]="state.id">
+                                            {{ state.name }}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="zip" formControlName="zip" class="form-control" name="Zip" id="zip"
+                                        placeholder="Postal-Code." required>
+                                </div>
+                                <div class="form-group">
+                                    <select class="custom-select form-control" formControlName="country">
+                                        <option *ngFor="let country of countries" [value]="country.id">
+                                            {{ country.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="submit" class="btnRegister" value="Register" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
